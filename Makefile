@@ -16,4 +16,4 @@ clean:
 	rm -rf build
 
 run: build
-	./build/pax-sdl
+	./build/pax-playground
