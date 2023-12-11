@@ -35,6 +35,8 @@ typedef struct {
     shape_type_t type;
     // Current transformation matrix.
     matrix_2d_t  matrix;
+    // Shape color.
+    pax_col_t    color;
     // Description of the shape.
     union {
         // A straight line.
@@ -77,8 +79,12 @@ typedef enum {
 } metarender_t;
 
 // Render and metarender a shape.
-void shape_renderall(pax_buf_t *gfx, pax_buf_t *meta, float meta_scale, metarender_t meta_mode, shape_t *shape);
+void shape_renderall(pax_buf_t *gfx, pax_buf_t *meta, metarender_t meta_mode, shape_t *shape);
 // Render a shape.
-void shape_render(pax_buf_t *gfx, shape_t *shape);
+void shape_render(pax_buf_t *gfx, shape_t *shape) {
+    shape_renderall(gfx, NULL, METARENDER_NONE, shape);
+}
 // Metarender a shape.
-void shape_metarender(pax_buf_t *meta, float meta_scale, metarender_t meta_mode, shape_t *shape);
+void shape_metarender(pax_buf_t *meta, metarender_t meta_mode, shape_t *shape) {
+    shape_renderall(NULL, meta, meta_mode, shape);
+}
